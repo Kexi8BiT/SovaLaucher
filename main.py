@@ -4,16 +4,10 @@ import json
 from internets import get_ip, get_updates
 from sound_effect import BoopSound
 import ctypes
-from BlurWindow.blurWindow import GlobalBlur
 from games_page import go_to_main, get_games_page
 from settings_page import go_to_settings, get_settings_page
 from ui import interface_button, interface_switch
 from game_run_page import GamesPage
-class Blur:
-    @staticmethod
-    def get_current_hwnd():
-        hwnd = ctypes.windll.user32.GetForegroundWindow()
-        GlobalBlur(hwnd)
 sound = True
 
 launcher_name = "SovaLauncher"
