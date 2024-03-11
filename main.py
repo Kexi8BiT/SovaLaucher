@@ -33,7 +33,7 @@ def main(page: ft.Page):
     content = ft.Container()
     GAMES = ft.Container(get_games_page(page, content))
     SETTINGS = ft.Container(get_settings_page(page))
-    content.content = SETTINGS
+    content.content = GAMES
 
 
 
