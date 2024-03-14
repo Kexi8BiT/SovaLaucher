@@ -130,6 +130,7 @@ def get_games_page(page, content):
                     Game_object(id="sovacraft", web_content=False, page=page, content=content),
                     Game_object(id="sovadash", web_content=False, page=page, content=content),
                     Game_object(id="sovadastry", web_content=False, page=page, content=content),
+                    Game_object(id="sovapidor", web_content=False, page=page, content=content),
 
                 ],
                 alignment=ft.MainAxisAlignment.START,
