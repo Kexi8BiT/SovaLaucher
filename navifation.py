@@ -1,7 +1,7 @@
 import flet as ft
 from sound_effect import BoopSound
 
-
+launcher_name = "PixelLauncher"
 
 
 
@@ -39,7 +39,7 @@ def get_elements(page, height, main, settings):
                     ft.Container(ft.Row([ft.Row([ft.Container(height=17, width=17, bgcolor=ft.colors.RED_400, border_radius=15,
                                                       on_click=lambda _: page.window_destroy()),
                                          ft.Container(height=17, width=17, bgcolor=ft.colors.AMBER_300, border_radius=15,
-                                                      on_click=close)]), ft.Text("SovaLauncher", size=12, weight=ft.FontWeight.BOLD, color="#565656"), ft.Container()], alignment=ft.MainAxisAlignment.SPACE_BETWEEN), bgcolor="#151515", padding=10), expand=True, maximizable=False)
+                                                      on_click=close)]), ft.Text(launcher_name, size=12, weight=ft.FontWeight.BOLD, color="#565656"), ft.Container()], alignment=ft.MainAxisAlignment.SPACE_BETWEEN), bgcolor="#151515", padding=10), expand=True, maximizable=False)
             ]
         )
 

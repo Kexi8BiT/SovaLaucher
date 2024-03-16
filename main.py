@@ -10,7 +10,7 @@ from ui import interface_button, interface_switch
 from game_run_page import GamesPage
 sound = True
 
-launcher_name = "SovaLauncher"
+launcher_name = "PixelLauncher"
 
 
 
