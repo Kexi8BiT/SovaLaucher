@@ -13,7 +13,7 @@ navigation_button = {
     "color": ft.colors.WHITE,
     "icon_color": ft.colors.WHITE,
     "style": ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=0), bgcolor=ft.colors.TRANSPARENT,
-                            surface_tint_color=ft.colors.TRANSPARENT, shadow_color=ft.colors.TRANSPARENT),
+                            surface_tint_color=ft.colors.TRANSPARENT, shadow_color=ft.colors.TRANSPARENT, overlay_color=ft.colors.with_opacity(0.1, ft.colors.WHITE)),
 }
 
 def get_elements(page, height, main, settings):

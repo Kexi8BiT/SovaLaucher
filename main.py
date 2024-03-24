@@ -30,7 +30,11 @@ def main(page: ft.Page):
     page.spacing = 0
     boop = BoopSound(page)
     page.overlay.append(ft.Audio("assets/audio/start.mp3", autoplay=True, volume=0.2))
-    content = ft.Container()
+    content = ft.AnimatedSwitcher(
+        transition=ft.AnimatedSwitcherTransition.FADE,
+        duration=500,
+        reverse_duration=500,
+    )
     GAMES = ft.Container(get_games_page(page, content))
     SETTINGS = ft.Container(get_settings_page(page))
     content.content = GAMES
@@ -40,7 +44,7 @@ def main(page: ft.Page):
 
 
 
-    drag_area, nav_left = get_elements(page, height, lambda _: go_to_main(content, page), lambda _: go_to_settings(content, page))
+    drag_area, nav_left = get_elements(page, height, lambda e: go_to_main(content, page), lambda _: go_to_settings(content, page))
 
     page.add(drag_area)
     page.add(ft.Row([nav_left, content]))

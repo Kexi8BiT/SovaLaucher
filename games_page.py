@@ -35,11 +35,6 @@ class Game_object(ft.UserControl):
     def go_to_page(self, e):
         print(f"Открывается страница с описанием {self.id}")
         self.boop.play()
-        self.content_container.height = 400
-        self.content_container.scale = 1.5
-        self.content_container.opacity = 0
-        self.content_container.update()
-        time.sleep(0.2)
         self.GAME_PAGE.set_page("e")
 
     def go_to_page_run(self, e):
