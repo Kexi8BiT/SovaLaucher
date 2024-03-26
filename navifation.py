@@ -1,31 +1,37 @@
 import flet as ft
-from sound_effect import BoopSound
-
+from PIL import Image
+import io
+import base64
+from ui import navigation_button
 launcher_name = "PixelLauncher"
 
 
+def colorize_image(rgb, image_path):
+    image = Image.open(image_path).convert('RGB')
+    colored_image = Image.new('RGB', image.size, rgb)
+    colored_image = Image.blend(colored_image, image, 0.5)
+    byte_stream = io.BytesIO()
+    colored_image.save(byte_stream, format='PNG')
+    byte_stream.seek(0)
+    base64_image = base64.b64encode(byte_stream.getvalue()).decode('utf-8')
+    return base64_image
 
 
-navigation_button = {
-    "width": 250,
-    "height": 45,
-    "bgcolor": ft.colors.TRANSPARENT,
-    "color": ft.colors.WHITE,
-    "icon_color": ft.colors.WHITE,
-    "style": ft.ButtonStyle(shape=ft.RoundedRectangleBorder(radius=0), bgcolor=ft.colors.TRANSPARENT,
-                            surface_tint_color=ft.colors.TRANSPARENT, shadow_color=ft.colors.TRANSPARENT, overlay_color=ft.colors.with_opacity(0.1, ft.colors.WHITE)),
-}
+logo_path = "assets/logo_.png"
+rgb = (100, -5, -2)
 
-def get_elements(page, height, main, settings):
+def get_elements(page, height, main, settings, library):
     def close(e):
         page.window_minimized = True
         page.update()
 
+
+    image_base64 = colorize_image(rgb, logo_path)
     navigation = ft.Container(ft.Column([ft.Container(
-        ft.Image("assets/logo.png", width=150),
+        ft.Image(src_base64=image_base64, width=150, border_radius=30),
         margin=ft.margin.only(bottom=40, top=20), on_click=lambda _: page.launch_url("https://www.sovagroup.one"), tooltip="site:https://www.sovagroup.one"),
                                          ft.ElevatedButton("Главная", **navigation_button, on_click=main),
-                                         ft.ElevatedButton("Библиотека", **navigation_button, on_click=lambda _: BoopSound(page).play()),
+                                         ft.ElevatedButton("Библиотека", **navigation_button, on_click=library),
                                          ft.ElevatedButton("Настройки", **navigation_button, on_click=settings),
                                          ft.Divider(),
                                          ft.ElevatedButton("Оффициальный лаунчер", **navigation_button, icon=ft.icons.OPEN_IN_NEW,  on_click=lambda _: page.launch_url("https://www.sovagroup.one/sovalaucher"), tooltip="sovagroup:official-launcher"),
