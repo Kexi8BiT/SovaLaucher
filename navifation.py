@@ -3,7 +3,7 @@ from PIL import Image
 import io
 import base64
 from ui import navigation_button
-launcher_name = "PixelLauncher"
+launcher_name = "SovaLauncher"
 
 
 def colorize_image(rgb, image_path):

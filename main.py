@@ -11,7 +11,7 @@ from game_run_page import GamesPage
 from home_page import get_main_page_home
 sound = True
 
-launcher_name = "PixelLauncher"
+launcher_name = "SovaLauncher"
 
 
 
@@ -30,7 +30,8 @@ def main(page: ft.Page):
     page.theme_mode = ft.ThemeMode.DARK
     page.spacing = 0
     boop = BoopSound(page)
-    page.overlay.append(ft.Audio("assets/audio/start.mp3", autoplay=True, volume=0.2))
+    if page.client_storage.get("on_sound") != False:
+        page.overlay.append(ft.Audio("assets/audio/start.mp3", autoplay=True, volume=0.2))
     content = ft.AnimatedSwitcher(
         transition=ft.AnimatedSwitcherTransition.FADE,
         duration=500,
@@ -43,7 +44,7 @@ def main(page: ft.Page):
     HOME = ft.Container(get_main_page_home(page))
     GAMES = ft.Container(get_games_page(page, content))
     SETTINGS = ft.Container(get_settings_page(page))
-    content.content = SETTINGS
+    content.content = HOME
 
 
 
