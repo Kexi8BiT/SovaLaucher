@@ -54,5 +54,4 @@ def main(page: ft.Page):
     page.add(drag_area)
     page.add(ft.Row([nav_left, content]))
 
-
 ft.app(main)

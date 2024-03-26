@@ -2,6 +2,7 @@ import flet as ft
 from sound_effect import BoopSound
 from ui import interface_button, interface_switch, interface_input
 from internets import check_api
+from expert import disk_select
 
 def go_to_settings(content, page: ft.Page):
     boop = BoopSound(page)
@@ -56,11 +57,19 @@ def get_settings_page(page: ft.Page):
         dialog.open = True
         page.update()
     boop = BoopSound(page)
+    def on_off_sound(e):
+        page.client_storage.set("on_sound", e.control.value)
+        print("Звуки отключены" if e.control.value == False else "Звуки включены")
+        boop.play()
+    on_sound = page.client_storage.get("on_sound")
+    if on_sound == None:
+        page.client_storage.set("on_sound", True)
+
     settings = ft.Container(
         ft.Column([
             ft.Row([
-                ft.ElevatedButton("Поменять путь установки", **interface_button,
-                                  icon=ft.icons.DRIVE_FILE_RENAME_OUTLINE_ROUNDED, on_click=boop.play_e),
+                ft.ElevatedButton("Поменять диск установки", **interface_button,
+                                  icon=ft.icons.DRIVE_FILE_RENAME_OUTLINE_ROUNDED, on_click=lambda _: disk_select(page)),
                 ft.ElevatedButton("Управление установками", **interface_button, icon=ft.icons.MEMORY,
                                   on_click=boop.play_e),
                 ft.ElevatedButton("Отчистить кэш", **interface_button, icon=ft.icons.CLEAR, on_click=boop.play_e)]),
@@ -71,7 +80,7 @@ def get_settings_page(page: ft.Page):
                              border_radius=10),
                 ft.Container(content=ft.Row(
                     [ft.Icon(ft.icons.AUDIOTRACK_SHARP, color="white", size=20), ft.Text("Звуки"),
-                     ft.Switch(**interface_switch, value=True, on_change=boop.play_e)]), bgcolor="#1c2024", padding=10,
+                     ft.Switch(**interface_switch, value=page.client_storage.get("on_sound"), on_change=on_off_sound)]), bgcolor="#1c2024", padding=10,
                     border_radius=10),
             ]),
             ft.Row([
